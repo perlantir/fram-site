@@ -1,4 +1,5 @@
 node_modules
+.deploy-secrets.local
 .next
 .env
 .env.local
