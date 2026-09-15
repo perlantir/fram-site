@@ -17,51 +17,47 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[color:var(--color-ivory)]/90 backdrop-blur">
-      <div className="mx-auto flex items-center justify-between px-6 py-5 md:px-10">
+    <header className="sticky top-0 z-40 bg-[color:var(--color-ivory)]/95 backdrop-blur">
+      <div className="mx-auto flex items-center justify-between px-6 py-6 md:px-12">
         <Wordmark />
-        <nav className="hidden items-center gap-10 md:flex">
-          {NAV.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "text-[11px] uppercase tracking-[0.18em]",
-                  active ? "text-charcoal" : "text-charcoal/70 hover:text-charcoal"
-                )}
-                style={{ color: "var(--color-charcoal)" }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden"
-          aria-label="Menu"
-          aria-expanded={open}
-        >
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-            <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="0" y1="7" x2="20" y2="7" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-10">
+          <nav className="hidden items-center gap-10 md:flex">
+            {NAV.map((item) => {
+              const active =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn("nav-link", !active && "opacity-60 hover:opacity-100")}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
+            className="flex flex-col gap-[3px]"
+          >
+            <span className="block h-px w-5 bg-[color:var(--color-charcoal)]" />
+            <span className="block h-px w-5 bg-[color:var(--color-charcoal)]" />
+            <span className="block h-px w-5 bg-[color:var(--color-charcoal)]" />
+          </button>
+        </div>
       </div>
       {open && (
-        <div className="border-t rule-soft md:hidden">
-          <div className="mx-auto flex flex-col gap-4 px-6 py-6">
+        <div className="border-t rule-soft">
+          <div className="mx-auto flex flex-col gap-4 px-6 py-6 md:px-12">
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="text-[11px] uppercase tracking-[0.18em]"
+                className="nav-link"
               >
                 {item.label}
               </Link>

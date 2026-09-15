@@ -19,14 +19,16 @@ export function DetailAccordion({
             <button
               type="button"
               onClick={() => setOpen(expanded ? null : key)}
-              className="flex w-full items-center justify-between py-4 text-left text-[11px] uppercase tracking-[0.18em]"
+              className="flex w-full items-center justify-between py-4 text-left text-[10px] uppercase tracking-[0.22em]"
               aria-expanded={expanded}
             >
               <span>{key}</span>
-              <span aria-hidden="true">{expanded ? "–" : "+"}</span>
+              <span aria-hidden="true" className="text-base leading-none">
+                {expanded ? "−" : "+"}
+              </span>
             </button>
             {expanded && (
-              <p className="pb-6 pr-8 text-sm leading-relaxed text-[color:var(--color-charcoal)]/80">
+              <p className="pb-6 pr-8 text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
                 {value}
               </p>
             )}

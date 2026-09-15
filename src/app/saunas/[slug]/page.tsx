@@ -53,9 +53,9 @@ export default async function ProductPage({
     <>
       <Header />
 
-      <main className="mx-auto px-6 pt-8 pb-24 md:px-10">
+      <main className="mx-auto px-6 pt-6 pb-24 md:px-12">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--color-muted)]">
+        <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-muted)]">
           <Link href="/saunas" className="hover:text-[color:var(--color-charcoal)]">
             Saunas
           </Link>
@@ -63,23 +63,23 @@ export default async function ProductPage({
           <span className="text-[color:var(--color-charcoal)]">{product.name}</span>
         </div>
 
-        <div className="mt-8 grid gap-10 md:grid-cols-12">
-          {/* Left rail — sibling models */}
+        <div className="mt-10 grid gap-10 md:grid-cols-12">
+          {/* Left rail — sibling model list */}
           <aside className="md:col-span-1">
-            <ul className="space-y-4 md:sticky md:top-24">
+            <ul className="space-y-3 md:sticky md:top-24">
               {siblings.map((s) => {
                 const active = s.slug === product.slug;
                 return (
                   <li key={s.slug}>
                     <Link
                       href={`/saunas/${s.slug}`}
-                      className={`block text-[11px] uppercase tracking-[0.18em] ${
+                      className={`block text-[10px] uppercase tracking-[0.22em] ${
                         active
-                          ? "text-[color:var(--color-charcoal)]"
+                          ? "font-medium text-[color:var(--color-charcoal)]"
                           : "text-[color:var(--color-muted)] hover:text-[color:var(--color-charcoal)]"
                       }`}
                     >
-                      {s.name.replace("FRAM ", "FRAM ")}
+                      {s.name}
                     </Link>
                   </li>
                 );
@@ -87,33 +87,38 @@ export default async function ProductPage({
             </ul>
           </aside>
 
-          {/* Middle — title + specs */}
+          {/* Middle — title, specs, price, CTA */}
           <section className="md:col-span-4">
-            <h1 className="font-serif-display" style={{ fontSize: "var(--text-hero)" }}>
+            <h1
+              className="font-serif-display"
+              style={{ fontSize: "var(--text-hero)" }}
+            >
               {product.name}.
             </h1>
-            <p className="mt-4 text-lg text-[color:var(--color-charcoal)]/80">
+            <p className="mt-4 font-serif-display text-[color:var(--color-charcoal)]"
+               style={{ fontSize: "1.35rem", fontStyle: "italic", lineHeight: 1.2 }}>
               {product.tagline}
-              <br />
-              <span className="text-[color:var(--color-charcoal)]">{product.subtitle}</span>
+            </p>
+            <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]">
+              {product.subtitle}
             </p>
 
             {/* Spec grid */}
-            <dl className="mt-10 grid grid-cols-[7rem_1fr] gap-y-3 text-xs uppercase tracking-[0.14em]">
+            <dl className="mt-10 grid grid-cols-[6.5rem_1fr]">
               {Object.entries(spec).map(([k, v]) => (
                 <div key={k} className="contents">
-                  <dt className="text-[color:var(--color-muted)]">{k}</dt>
-                  <dd className="text-[color:var(--color-charcoal)]">{v}</dd>
+                  <dt className="spec-key">{k}</dt>
+                  <dd className="spec-val">{v}</dd>
                 </div>
               ))}
             </dl>
 
-            <p className="mt-10 max-w-md text-sm leading-relaxed text-[color:var(--color-charcoal)]/80">
+            <p className="mt-10 max-w-md text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
               {product.description}
             </p>
 
-            {/* Sizes / prices */}
-            <div className="mt-10">
+            {/* Sizes */}
+            <div className="mt-12">
               <p className="kicker kicker-muted mb-4">Sizes</p>
               {tiers.length > 0 ? (
                 <PriceTiers
@@ -128,10 +133,10 @@ export default async function ProductPage({
               )}
             </div>
 
-            <div className="mt-10 flex items-center gap-8">
+            <div className="mt-10 flex flex-col items-start gap-6">
               <Link
                 href={`/inquire?product=${product.slug}`}
-                className="btn-primary"
+                className="btn-primary w-full max-w-xs justify-center"
               >
                 Inquire
               </Link>
@@ -140,49 +145,52 @@ export default async function ProductPage({
                 className="btn-ghost"
                 rel="noopener"
               >
-                Download Specs
+                Download Specs <span className="arrow">↓</span>
               </a>
             </div>
           </section>
 
-          {/* Right — product hero image */}
+          {/* Right — product hero */}
           <section className="md:col-span-7">
             <div className="aspect-[4/3] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
+              {/* Elegant abstract placeholder in brand tones. Replace via
+                  Admin → Products → Hero image URL with licensed product photography. */}
               <div
                 className="h-full w-full"
                 style={{
                   backgroundImage:
-                    "radial-gradient(ellipse at 50% 70%, rgba(23,23,22,0.20), transparent 65%), linear-gradient(135deg, rgba(23,23,22,0.06), rgba(23,23,22,0.10))",
+                    "radial-gradient(ellipse 60% 60% at 50% 70%, rgba(23,23,22,0.22), transparent 65%), linear-gradient(155deg, rgba(23,23,22,0.06), rgba(23,23,22,0.14))",
                 }}
+                aria-label={`${product.name} — image placeholder`}
               />
             </div>
           </section>
         </div>
 
-        {/* Drawings + Details row */}
+        {/* Drawings + Details */}
         <div className="mt-24 grid gap-10 border-t rule-soft pt-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className="kicker kicker-muted">Plan View</p>
-            <div className="mt-4 aspect-[4/3] w-full border rule bg-white/40">
+            <div className="mt-4 aspect-[4/3] w-full border rule bg-white/50 p-3">
               {product.planSvg ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={product.planSvg}
                   alt={`${product.name} plan view`}
-                  className="h-full w-full object-contain p-4"
+                  className="h-full w-full object-contain"
                 />
               ) : null}
             </div>
           </div>
           <div className="md:col-span-4">
             <p className="kicker kicker-muted">Front Elevation</p>
-            <div className="mt-4 aspect-[4/3] w-full border rule bg-white/40">
+            <div className="mt-4 aspect-[4/3] w-full border rule bg-white/50 p-3">
               {product.elevationSvg ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={product.elevationSvg}
                   alt={`${product.name} elevation`}
-                  className="h-full w-full object-contain p-4"
+                  className="h-full w-full object-contain"
                 />
               ) : null}
             </div>
