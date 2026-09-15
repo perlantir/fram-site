@@ -13,23 +13,21 @@ const PUBLIC_ADMIN_PATHS = new Set([
   "/admin/bootstrap",
 ]);
 
-const SESSION_COOKIE = "__Host-fram.session";
+const SESSION_COOKIE_CANDIDATES = [
+  "__Host-fram.session",
+  "__Secure-authjs.session-token",
+  "authjs.session-token",
+  "__Secure-next-auth.session-token",
+  "next-auth.session-token",
+];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const n = nonce();
   const isProd = process.env.NODE_ENV === "production";
 
-  // Admin auth guard: any /admin/* route except the public ones below
-  // must have a session cookie. Full role check + user lookup still runs
-  // server-side in each protected page/action.
   if (pathname.startsWith("/admin") && !PUBLIC_ADMIN_PATHS.has(pathname)) {
-    const hasSession =
-      req.cookies.get(SESSION_COOKIE) ??
-      req.cookies.get("next-auth.session-token") ??
-      req.cookies.get("__Secure-next-auth.session-token") ??
-      req.cookies.get("authjs.session-token") ??
-      req.cookies.get("__Secure-authjs.session-token");
+    const hasSession = SESSION_COOKIE_CANDIDATES.some((c) => req.cookies.get(c));
     if (!hasSession) {
       const url = req.nextUrl.clone();
       url.pathname = "/admin/login";
@@ -38,6 +36,8 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // 'strict-dynamic' lets any script loaded by a nonced script also run,
+  // which is required for Next.js chunk loading in the App Router.
   const csp = [
     `default-src 'self'`,
     `base-uri 'self'`,
@@ -46,15 +46,18 @@ export function middleware(req: NextRequest) {
     `img-src 'self' data: blob: https:`,
     `font-src 'self' data:`,
     `style-src 'self' 'unsafe-inline'`,
-    `script-src 'self' 'nonce-${n}' ${isProd ? "" : "'unsafe-eval'"} https://challenges.cloudflare.com`,
+    `script-src 'self' 'nonce-${n}' 'strict-dynamic' 'unsafe-inline' ${isProd ? "" : "'unsafe-eval'"} https://challenges.cloudflare.com https:`,
     `frame-src https://challenges.cloudflare.com`,
     `connect-src 'self' https://challenges.cloudflare.com`,
     `form-action 'self'`,
     `upgrade-insecure-requests`,
-  ].join("; ");
+  ]
+    .join("; ")
+    .replace(/\s{2,}/g, " ");
 
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-nonce", n);
+  requestHeaders.set("Content-Security-Policy", csp);
 
   const res = NextResponse.next({ request: { headers: requestHeaders } });
   res.headers.set("Content-Security-Policy", csp);
