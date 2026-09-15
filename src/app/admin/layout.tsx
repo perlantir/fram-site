@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { eq } from "drizzle-orm";
 import { auth, signOut } from "@/lib/auth";
 import { Wordmark } from "@/components/site/Wordmark";
+import { db } from "@/db";
+import { users as usersTable } from "@/db/schema";
 
 export const metadata = { title: "Admin", robots: { index: false, follow: false } };
 
@@ -35,6 +38,12 @@ export default async function AdminLayout({
   }
 
   const items = NAV.filter((n) => n.roles.includes(user.role));
+
+  const fresh = await db.query.users.findFirst({
+    where: eq(usersTable.id, user.id),
+    columns: { totpEnabled: true },
+  });
+  const needs2fa = user.role === "admin" && !fresh?.totpEnabled;
 
   return (
     <div className="min-h-screen bg-[color:var(--color-ivory)] text-[color:var(--color-charcoal)]">
@@ -72,6 +81,20 @@ export default async function AdminLayout({
         </div>
       </aside>
       <main className="md:pl-60">
+        {needs2fa && (
+          <div className="border-b border-amber-500/40 bg-amber-500/10 px-6 py-3 text-sm md:px-10">
+            <strong className="mr-2 text-[11px] uppercase tracking-[0.18em]">
+              Enable 2FA now.
+            </strong>
+            You&apos;re signed in without two-factor auth.{" "}
+            <Link
+              href={`/admin/users/${user.id}`}
+              className="underline"
+            >
+              Enroll a TOTP secret →
+            </Link>
+          </div>
+        )}
         <div className="mx-auto max-w-6xl px-6 py-10 md:px-10 md:py-12">
           {children}
         </div>

@@ -124,7 +124,10 @@ export const authConfig: NextAuthConfig = {
           return null;
         }
 
-        if (user.role === "admin" || user.totpEnabled) {
+        // 2FA rule: if TOTP is enrolled, it's required. Admins that have not
+        // yet enrolled can sign in once (to complete enrollment) but should
+        // enroll immediately at /admin/users/[id].
+        if (user.totpEnabled) {
           if (!user.totpSecret) return null;
           const token = (totp ?? "").trim();
           if (!token || !verifyTotp(user.totpSecret, token)) {
