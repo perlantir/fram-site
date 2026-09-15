@@ -36,8 +36,10 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // 'strict-dynamic' lets any script loaded by a nonced script also run,
-  // which is required for Next.js chunk loading in the App Router.
+  // Practical CSP for Next.js App Router: allow inline scripts (Next emits
+  // many SSR hydration scripts and doesn't reliably nonce them). Everything
+  // else stays locked down: no eval in prod, restricted origins, no iframes,
+  // etc.
   const csp = [
     `default-src 'self'`,
     `base-uri 'self'`,
@@ -46,7 +48,7 @@ export function middleware(req: NextRequest) {
     `img-src 'self' data: blob: https:`,
     `font-src 'self' data:`,
     `style-src 'self' 'unsafe-inline'`,
-    `script-src 'self' 'nonce-${n}' 'strict-dynamic' 'unsafe-inline' ${isProd ? "" : "'unsafe-eval'"} https://challenges.cloudflare.com https:`,
+    `script-src 'self' 'unsafe-inline' ${isProd ? "" : "'unsafe-eval'"} https://challenges.cloudflare.com`,
     `frame-src https://challenges.cloudflare.com`,
     `connect-src 'self' https://challenges.cloudflare.com`,
     `form-action 'self'`,
