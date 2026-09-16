@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const serif = Instrument_Serif({
+const serif = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500"],
   style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",

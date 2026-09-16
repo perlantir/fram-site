@@ -18,22 +18,18 @@ export default async function SaunasIndex() {
   return (
     <>
       <Header />
-      <main className="mx-auto px-6 pt-20 pb-24 md:px-10">
-        <p className="kicker kicker-muted">Saunas.</p>
+      <main className="mx-auto px-6 pt-10 pb-24 md:px-10">
         <h1
-          className="mt-6 font-serif-display"
+          className="font-serif-display"
           style={{ fontSize: "var(--text-hero)" }}
         >
-          Three saunas.
-          <br />
-          One philosophy.
+          Saunas.
         </h1>
-        <p className="mt-8 max-w-lg text-lg leading-relaxed text-[color:var(--color-charcoal)]/80">
-          Each model is a distinct expression of the same idea — that a sauna
-          should be honest, considered, and built to be lived with.
+        <p className="mt-6 max-w-lg text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
+          Three distinct saunas, one shared philosophy: honest materials and considered design.
         </p>
 
-        <div className="mt-24 grid gap-12 border-t rule-soft pt-16 md:grid-cols-3 md:gap-8">
+        <div className="mt-16 grid gap-12 border-t rule-soft pt-12 md:grid-cols-3 md:gap-8">
           {rows.map((p) => (
             <Link
               key={p.id}
@@ -65,9 +61,6 @@ export default async function SaunasIndex() {
                 >
                   {p.name}.
                 </h3>
-                <p className="mt-3 text-sm text-[color:var(--color-charcoal)]/80">
-                  {p.subtitle}
-                </p>
               </div>
             </Link>
           ))}

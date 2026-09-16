@@ -9,17 +9,17 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="mx-auto px-6 pt-16 pb-28 md:px-12 md:pt-24 md:pb-40">
-          <p className="kicker kicker-muted">Residential Saunas.</p>
+        <section className="mx-auto px-6 pt-6 pb-14 md:px-12 md:pt-8 md:pb-20">
           <h1
-            className="mt-8 font-serif-display text-[color:var(--color-charcoal)]"
+            className="font-serif-display text-[color:var(--color-charcoal)]"
             style={{ fontSize: "var(--text-display)" }}
           >
             A Nordic
             <br />
             Experience.
           </h1>
-          <div className="mt-12 flex flex-wrap items-center gap-6">
+          <p className="kicker kicker-muted mt-6">Residential Saunas.</p>
+          <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
             <Link href="/saunas" className="btn-primary">
               Explore Saunas
             </Link>
@@ -29,9 +29,20 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Architectural plan image */}
+        <div className="border-t rule-soft">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/home-design-illustration.png"
+            alt="FRAM — architectural plan"
+            className="w-full object-contain bg-[color:var(--color-ivory-soft)]"
+            style={{ maxHeight: "520px" }}
+          />
+        </div>
+
         {/* Design section */}
         <section className="border-t rule-soft">
-          <div className="mx-auto grid gap-14 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
+          <div className="mx-auto grid gap-14 px-6 py-16 md:grid-cols-12 md:px-12 md:py-20">
             <div className="md:col-span-4">
               <p className="kicker kicker-muted">Design.</p>
               <h2
@@ -52,23 +63,6 @@ export default function Home() {
               <Link href="/saunas" className="mt-10 inline-flex btn-ghost">
                 Explore Designs <span className="arrow">→</span>
               </Link>
-            </div>
-            <div className="md:col-span-8">
-              <div className="aspect-[16/10] w-full border rule bg-[color:var(--color-ivory-soft)]/40 p-4">
-                <svg viewBox="0 0 800 500" className="h-full w-full">
-                  <g fill="none" stroke="#171716" strokeWidth="1">
-                    <rect x="30" y="30" width="740" height="440" strokeWidth="1.25" />
-                    <rect x="70" y="70" width="660" height="360" />
-                    <line x1="70" y1="210" x2="730" y2="210" />
-                    <line x1="70" y1="310" x2="730" y2="310" />
-                    <circle cx="170" cy="140" r="46" />
-                    <circle cx="170" cy="140" r="28" />
-                    <circle cx="170" cy="140" r="12" />
-                    <path d="M580 430 Q580 340 660 340" strokeDasharray="4 4" />
-                    <line x1="560" y1="430" x2="680" y2="430" strokeWidth="2" />
-                  </g>
-                </svg>
-              </div>
             </div>
           </div>
         </section>
@@ -97,6 +91,40 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Process section */}
+        <section className="border-t rule-soft">
+          <div className="mx-auto px-6 py-24 md:px-12 md:py-32">
+            <h2
+              className="font-serif-display"
+              style={{ fontSize: "var(--text-title)" }}
+            >
+              Residential sauna,
+              <br />
+              resolved.
+            </h2>
+            <div className="mt-16 grid gap-12 border-t rule-soft pt-12 md:grid-cols-3 md:gap-8">
+              <div>
+                <p className="kicker kicker-muted">I — Select</p>
+                <p className="mt-6 text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
+                  Choose the FRAM model designed for your space and expression.
+                </p>
+              </div>
+              <div>
+                <p className="kicker kicker-muted">II — Size</p>
+                <p className="mt-6 text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
+                  Select the defined two-, four-, or six-person footprint.
+                </p>
+              </div>
+              <div>
+                <p className="kicker kicker-muted">III — Complete</p>
+                <p className="mt-6 text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
+                  Materials, heat, lighting, and detailing are already resolved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Inquire CTA */}
         <section className="border-t rule-soft">
           <div className="mx-auto grid gap-14 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
@@ -104,11 +132,8 @@ export default function Home() {
               <p className="kicker kicker-muted">Inquire.</p>
             </div>
             <div className="md:col-span-8">
-              <Link
-                href="/inquire"
-                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em]"
-              >
-                Begin a Project <span>→</span>
+              <Link href="/inquire" className="btn-primary">
+                Begin a Project
               </Link>
             </div>
           </div>

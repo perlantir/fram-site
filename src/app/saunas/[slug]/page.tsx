@@ -66,7 +66,7 @@ export default async function ProductPage({
         <div className="mt-10 grid gap-10 md:grid-cols-12">
           {/* Left rail — sibling model list */}
           <aside className="md:col-span-1">
-            <ul className="space-y-3 md:sticky md:top-24">
+            <ul className="flex flex-row gap-6 md:flex-col md:gap-0 md:space-y-3 md:sticky md:top-24">
               {siblings.map((s) => {
                 const active = s.slug === product.slug;
                 return (
@@ -113,9 +113,11 @@ export default async function ProductPage({
               ))}
             </dl>
 
-            <p className="mt-10 max-w-md text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
-              {product.description}
-            </p>
+            {product.description ? (
+              <p className="mt-10 max-w-md text-[13px] leading-[1.7] text-[color:var(--color-charcoal)]/80">
+                {product.description}
+              </p>
+            ) : null}
 
             {/* Sizes */}
             <div className="mt-12">

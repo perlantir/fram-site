@@ -33,21 +33,20 @@ export default async function EvidencePage() {
   return (
     <>
       <Header />
-      <main className="mx-auto px-6 pt-16 pb-24 md:px-12">
-        <p className="kicker kicker-muted">Evidence.</p>
+      <main className="mx-auto px-6 pt-10 pb-24 md:px-12">
         <h1
-          className="mt-8 font-serif-display"
+          className="font-serif-display"
           style={{ fontSize: "var(--text-hero)" }}
         >
           Evidence.
         </h1>
-        <p className="mt-8 max-w-md text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]/70">
+        <p className="mt-6 max-w-md text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]/70">
           Research on heat and cold exposure
           <br />
           and human health.
         </p>
 
-        <div className="mt-24 border-t rule-soft">
+        <div className="mt-16 border-t rule-soft">
           {(Object.keys(LABELS) as (keyof typeof LABELS)[]).map((cat) => {
             const items = byCategory[cat];
             if (items.length === 0) return null;
@@ -60,7 +59,7 @@ export default async function EvidencePage() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border rule text-[color:var(--color-charcoal)]">
                     <EvidenceIcon category={cat} />
                   </div>
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-[color:var(--color-muted)]">
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-[color:var(--color-charcoal)]/50">
                     {LABELS[cat]}
                   </p>
                 </div>
@@ -71,16 +70,13 @@ export default async function EvidencePage() {
                       className="grid gap-6 py-6 md:grid-cols-[1fr_auto] md:items-start"
                     >
                       <div>
-                        <p className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-muted)]">
-                          {r.kicker}
-                        </p>
                         <h3
-                          className="mt-4 font-serif-display max-w-2xl"
-                          style={{ fontSize: "1.75rem", lineHeight: 1.1 }}
+                          className="font-serif-display max-w-2xl"
+                          style={{ fontSize: "1.5rem", lineHeight: 1.15 }}
                         >
                           {r.title}
                         </h3>
-                        <p className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-muted)]">
+                        <p className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]/55">
                           {r.journal} · {r.year}
                           {r.authors ? ` · ${r.authors}` : ""}
                         </p>
@@ -104,12 +100,12 @@ export default async function EvidencePage() {
         </div>
 
         <div className="mt-20 pt-8">
-          <p className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-muted)]">
+          <p className="text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]/55">
             Selected peer-reviewed research on heat
             <br />
             and cold exposure.
           </p>
-          <p className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-muted)]">
+          <p className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[color:var(--color-charcoal)]/55">
             FRAM does not provide medical advice.
           </p>
         </div>
