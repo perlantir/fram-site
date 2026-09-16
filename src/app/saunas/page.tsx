@@ -41,12 +41,21 @@ export default async function SaunasIndex() {
               className="group block"
             >
               <div className="aspect-[4/5] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
-                <div
-                  className="h-full w-full transition-transform duration-500 group-hover:scale-[1.02]"
-                  style={{
-                    backgroundImage: `linear-gradient(135deg, rgba(23,23,22,0.04), rgba(23,23,22,0.08))`,
-                  }}
-                />
+                {p.heroImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`/images/${p.slug}-hero-card.jpg`}
+                    alt={`${p.name} — ${p.tagline}`}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                ) : (
+                  <div
+                    className="h-full w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                    style={{
+                      backgroundImage: `linear-gradient(135deg, rgba(23,23,22,0.04), rgba(23,23,22,0.08))`,
+                    }}
+                  />
+                )}
               </div>
               <div className="mt-6">
                 <p className="kicker kicker-muted">{p.tagline}</p>

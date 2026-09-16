@@ -153,16 +153,23 @@ export default async function ProductPage({
           {/* Right — product hero */}
           <section className="md:col-span-7">
             <div className="aspect-[4/3] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
-              {/* Elegant abstract placeholder in brand tones. Replace via
-                  Admin → Products → Hero image URL with licensed product photography. */}
-              <div
-                className="h-full w-full"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(ellipse 60% 60% at 50% 70%, rgba(23,23,22,0.22), transparent 65%), linear-gradient(155deg, rgba(23,23,22,0.06), rgba(23,23,22,0.14))",
-                }}
-                aria-label={`${product.name} — image placeholder`}
-              />
+              {product.heroImage ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={product.heroImage}
+                  alt={`${product.name} — ${product.tagline}`}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div
+                  className="h-full w-full"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(ellipse 60% 60% at 50% 70%, rgba(23,23,22,0.22), transparent 65%), linear-gradient(155deg, rgba(23,23,22,0.06), rgba(23,23,22,0.14))",
+                  }}
+                  aria-label={`${product.name} — image placeholder`}
+                />
+              )}
             </div>
           </section>
         </div>
