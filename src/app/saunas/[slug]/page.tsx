@@ -154,7 +154,7 @@ export default async function ProductPage({
 
           {/* Right — product hero */}
           <section className="md:col-span-7">
-            <div className="w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
+            <div className="w-full overflow-hidden">
               {product.heroImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img

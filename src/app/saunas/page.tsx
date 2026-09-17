@@ -36,13 +36,13 @@ export default async function SaunasIndex() {
               href={`/saunas/${p.slug}`}
               className="group block"
             >
-              <div className="aspect-[4/3] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
+              <div className="w-full overflow-hidden">
                 {p.heroImage ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={p.heroImage}
                     alt={`${p.name} — ${p.tagline}`}
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 ) : (
                   <div
