@@ -154,13 +154,13 @@ export default async function ProductPage({
 
           {/* Right — product hero */}
           <section className="md:col-span-7">
-            <div className="aspect-[4/3] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
+            <div className="w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
               {product.heroImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={product.heroImage}
                   alt={`${product.name} — ${product.tagline}`}
-                  className="h-full w-full object-cover"
+                  className="w-full h-auto block"
                 />
               ) : (
                 <div
