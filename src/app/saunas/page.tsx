@@ -36,17 +36,17 @@ export default async function SaunasIndex() {
               href={`/saunas/${p.slug}`}
               className="group block"
             >
-              <div className="w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
+              <div className="aspect-[4/3] w-full overflow-hidden border rule bg-[color:var(--color-ivory-soft)]">
                 {p.heroImage ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`/images/${p.slug}-hero-card.jpg`}
+                    src={p.heroImage}
                     alt={`${p.name} — ${p.tagline}`}
-                    className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 ) : (
                   <div
-                    className="aspect-[4/5] w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="h-full w-full transition-transform duration-500 group-hover:scale-[1.02]"
                     style={{
                       backgroundImage: `linear-gradient(135deg, rgba(23,23,22,0.04), rgba(23,23,22,0.08))`,
                     }}
