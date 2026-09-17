@@ -33,7 +33,7 @@ export default function Home() {
         <div className="border-t rule-soft">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/home-design-illustration.png"
+            src="/images/home-design-illustration.jpg"
             alt="FRAM — architectural plan"
             className="w-full object-contain bg-[color:var(--color-ivory-soft)]"
             style={{ maxHeight: "520px" }}
